@@ -1,0 +1,65 @@
+{
+  "forecast": {
+    "base_revenue_musd": 351.3,
+    "growth_rate_applied": 0.2325,
+    "quarterly_rate_applied": 0.0537,
+    "growth_detail": {
+      "trailing_avg": 0.245,
+      "guidance_mid": 0.195,
+      "ndr_spread": 0.04999999999999982,
+      "nudge_applied": 0.007499999999999973
+    },
+    "confidence_band_pp": 4.5,
+    "quarters": [
+      {
+        "quarter": "Q2 2026",
+        "base_case_musd": 370.1,
+        "low_musd": 366.7,
+        "high_musd": 373.5
+      },
+      {
+        "quarter": "Q3 2026",
+        "base_case_musd": 390.0,
+        "low_musd": 382.8,
+        "high_musd": 397.1
+      },
+      {
+        "quarter": "Q4 2026",
+        "base_case_musd": 410.9,
+        "low_musd": 399.6,
+        "high_musd": 422.1
+      },
+      {
+        "quarter": "Q1 2027",
+        "base_case_musd": 433.0,
+        "low_musd": 417.2,
+        "high_musd": 448.8
+      },
+      {
+        "quarter": "Q2 2027",
+        "base_case_musd": 456.2,
+        "low_musd": 435.5,
+        "high_musd": 477.1
+      },
+      {
+        "quarter": "Q3 2027",
+        "base_case_musd": 480.7,
+        "low_musd": 454.6,
+        "high_musd": 507.2
+      },
+      {
+        "quarter": "Q4 2027",
+        "base_case_musd": 506.5,
+        "low_musd": 474.6,
+        "high_musd": 539.3
+      },
+      {
+        "quarter": "Q1 2028",
+        "base_case_musd": 533.6,
+        "low_musd": 495.4,
+        "high_musd": 573.3
+      }
+    ]
+  },
+  "sample_commentary": "FORECAST \u2014 Q2 2026 Revenue: $366.7M \u2013 $373.5M (base case $370.1M)\n\nDrivers:\n- Trailing growth trend: 24.5% YoY -> CONFIRMED (filed, Income statement + 2026 guidance, 6-K filings)\n- Guidance midpoint: 19.5% YoY -> CONFIRMED (company guidance)\n- NDR spread (enterprise 115% vs overall 110%) nudges growth up 0.75pp -> HYPOTHESIS (assumes enterprise mix-shift continues; no quarter-specific guidance on this)\n\nOPEN ITEMS:\n- Q2 2025 and Q3 2025 revenue not in the extracted data set \u2014 trailing average uses only 2 of 4 trailing quarters. Flagged as a data gap, not papered over.\n- FX headwind (100-200 bps per FY2026 guidance) not decomposed into revenue vs. margin impact \u2014 flagged for analyst review before this forecast is used externally."
+}

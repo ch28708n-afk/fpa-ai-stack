@@ -1,0 +1,57 @@
+{
+  "company": "monday.com (MNDY)",
+  "source_file": "MNDY_Financial_Extract.md",
+  "as_of_quarter": "Q1 2026",
+  "quarterly_revenue": {
+    "note": "Only 3 of 5 quarters shown in the extract have full figures — Q2 2025 and Q3 2025 not pulled. This is a known data gap, flagged per Confirmed-vs-Hypothesis discipline rather than papered over.",
+    "Q1_2025": {"revenue_musd": 282.3, "yoy_growth": null},
+    "Q4_2025": {"revenue_musd": 333.9, "yoy_growth": 0.25},
+    "Q1_2026": {"revenue_musd": 351.3, "yoy_growth": 0.24}
+  },
+  "drivers": {
+    "revenue_growth_rate": {
+      "trailing_values": [0.25, 0.24],
+      "trailing_avg": 0.245,
+      "guidance_range": [0.19, 0.20],
+      "citation": "Income statement + 2026 guidance, 6-K filings"
+    },
+    "ndr": {
+      "overall": 1.10,
+      "enterprise_50k_plus": 1.16,
+      "enterprise_100k_plus": 1.15,
+      "trend": "stable Q1 2026 vs Q4 2025 (110% both)",
+      "citation": "MD&A, 6-K Q1 2026"
+    },
+    "gross_margin": {
+      "value": 0.89,
+      "trend": "flat across all 5 quarters shown",
+      "citation": "Income statement"
+    },
+    "customer_counts": {
+      "over_100k_arr": {"value": 1844, "yoy_growth": 0.39},
+      "over_500k_arr": {"value": 99, "yoy_growth": 0.74},
+      "citation": "MD&A, 6-K Q1 2026"
+    },
+    "rpo": {
+      "total_rpo_musd": 880,
+      "total_rpo_yoy_growth": 0.33,
+      "crpo_musd": 716,
+      "crpo_yoy_growth": 0.26,
+      "citation": "MD&A, 6-K Q1 2026"
+    },
+    "deferred_revenue": {
+      "current_musd": 455.1,
+      "yoy_growth": 0.20,
+      "citation": "Balance sheet, 6-K Q1 2026"
+    },
+    "non_gaap_operating_margin": {
+      "prior_fy_actual": 0.14,
+      "guidance_range": [0.11, 0.12],
+      "citation": "Income statement + 2026 guidance"
+    }
+  },
+  "known_gaps": [
+    "Q2 2025 and Q3 2025 revenue not in the extracted data set — trailing average uses only 2 of 4 trailing quarters. Flagged as a data gap, not papered over.",
+    "FX headwind (100-200 bps per FY2026 guidance) not decomposed into revenue vs. margin impact — flagged for analyst review before this forecast is used externally."
+  ]
+}

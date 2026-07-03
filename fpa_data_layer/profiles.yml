@@ -1,0 +1,7 @@
+fpa_data_layer:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: warehouse.duckdb
+      threads: 1

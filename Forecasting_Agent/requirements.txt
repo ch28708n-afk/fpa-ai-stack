@@ -1,0 +1,3 @@
+# No external dependencies — stdlib only (json, math).
+# Kept as an explicit empty manifest so it's clear this was a deliberate
+# choice, not an oversight.

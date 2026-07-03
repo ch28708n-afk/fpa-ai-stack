@@ -1,0 +1,10 @@
+# Dashboard (run on any Python 3.x):
+duckdb>=1.5
+streamlit>=1.58
+pandas>=2.0
+
+# dbt (REQUIRES Python 3.11 — dbt-core breaks on 3.14+ due to a mashumaro
+# incompatibility as of mid-2026. Install these into a dedicated venv, not
+# the same environment as the dashboard packages above. See README.md.)
+# dbt-core>=1.11
+# dbt-duckdb>=1.10

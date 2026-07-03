@@ -1,0 +1,83 @@
+version: 2
+
+models:
+  - name: stg_drivers
+    description: >
+      One row per company, cleaned from raw.drivers. Growth rates and margins
+      converted to readable percentages; ndr_direction computed (expanding
+      if NDR >= 100%, else contracting). No business logic beyond typing/
+      renaming — staging is 1:1 with the source per dbt convention.
+    columns:
+      - name: company
+        description: Company name + ticker, e.g. "monday.com (MNDY)"
+        data_tests:
+          - not_null
+          - unique
+      - name: as_of_quarter
+        description: The base quarter the forecast is built from, e.g. "Q1 2026"
+        data_tests:
+          - not_null
+      - name: ndr_direction
+        description: "'expanding' if NDR >= 100%, else 'contracting'"
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['expanding', 'contracting']
+      - name: known_gaps_count
+        description: Count of data gaps flagged in the source driver file (never fabricated to zero)
+        data_tests:
+          - not_null
+
+  - name: stg_forecast_quarters
+    description: >
+      One row per company per forecasted quarter, from raw.forecast_quarters.
+      Adds quarter_num/fiscal_year (parsed from the "Q_ YYYY" label) and
+      band_width_musd (high - low) for the dashboard's confidence visualization.
+    columns:
+      - name: company
+        description: Company name + ticker
+        data_tests:
+          - not_null
+      - name: quarter
+        description: Forecasted quarter label, e.g. "Q2 2026"
+        data_tests:
+          - not_null
+      - name: base_case_musd
+        description: Forecasted revenue, base case, in millions USD
+        data_tests:
+          - not_null
+      - name: band_width_musd
+        description: high_musd - low_musd; should always be positive (high >= low)
+        data_tests:
+          - not_null
+
+  - name: fct_company_forecast
+    description: >
+      Mart — the dashboard's single source table. One row per company per
+      forecasted quarter, joined against that company's driver context, with
+      a sequential quarter_index (1-8) for charting independent of each
+      company's fiscal calendar. This is the "done" artifact for Phase 2:
+      source -> model -> dashboard, refreshable with zero code changes for
+      a new company (see driver_schema_template.json in Forecasting_Agent\).
+    columns:
+      - name: company
+        description: Company name + ticker
+        data_tests:
+          - not_null
+      - name: quarter_index
+        description: Sequential 1-8 position in the forecast horizon, per company
+        data_tests:
+          - not_null
+      - name: base_case_musd
+        description: Forecasted revenue, base case, in millions USD
+        data_tests:
+          - not_null
+      - name: low_musd
+        description: Forecast low bound (base case minus confidence band)
+        data_tests:
+          - not_null
+      - name: high_musd
+        description: Forecast high bound (base case plus confidence band)
+        data_tests:
+          - not_null

@@ -1,0 +1,55 @@
+{
+  "_comment": "Template for a new company. Copy this file, fill in real filing data, drop the filename into run_forecast.py's load_drivers() call. No code changes needed — forecast_engine.py and commentary_generator.py read every value from this schema generically.",
+  "company": "COMPANY NAME (TICKER)",
+  "source_file": "path to the extracted financial data markdown",
+  "as_of_quarter": "Q_ YYYY",
+  "quarterly_revenue": {
+    "note": "List whatever quarters you actually pulled. Missing quarters are fine — just don't fabricate them. Add a note here if the trailing window is short.",
+    "Q_YYYY": {"revenue_musd": 0.0, "yoy_growth": null}
+  },
+  "drivers": {
+    "revenue_growth_rate": {
+      "trailing_values": [0.0],
+      "trailing_avg": 0.0,
+      "guidance_range": [0.0, 0.0],
+      "citation": "where this came from in the filing"
+    },
+    "ndr": {
+      "overall": 1.0,
+      "enterprise_50k_plus": 1.0,
+      "enterprise_100k_plus": 1.0,
+      "trend": "describe trend vs prior quarter",
+      "citation": "where this came from"
+    },
+    "gross_margin": {
+      "value": 0.0,
+      "trend": "flat / rising / falling",
+      "citation": "where this came from"
+    },
+    "customer_counts": {
+      "over_100k_arr": {"value": 0, "yoy_growth": 0.0},
+      "over_500k_arr": {"value": 0, "yoy_growth": 0.0},
+      "citation": "where this came from"
+    },
+    "rpo": {
+      "total_rpo_musd": 0.0,
+      "total_rpo_yoy_growth": 0.0,
+      "crpo_musd": 0.0,
+      "crpo_yoy_growth": 0.0,
+      "citation": "where this came from"
+    },
+    "deferred_revenue": {
+      "current_musd": 0.0,
+      "yoy_growth": 0.0,
+      "citation": "where this came from"
+    },
+    "non_gaap_operating_margin": {
+      "prior_fy_actual": 0.0,
+      "guidance_range": [0.0, 0.0],
+      "citation": "where this came from"
+    }
+  },
+  "known_gaps": [
+    "List anything you couldn't confirm or pull — missing quarters, undecomposed guidance items, etc. This feeds directly into the commentary's OPEN ITEMS section. Don't leave this empty just to look clean."
+  ]
+}

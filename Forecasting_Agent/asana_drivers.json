@@ -1,0 +1,61 @@
+{
+  "company": "Asana, Inc. (ASAN)",
+  "source_file": "Sourced via WebSearch (SEC EDGAR 403'd) — Businesswire/press-release earnings summaries, Q1 FY2027 + Q4/Q3 FY2026",
+  "as_of_quarter": "Q1 2027",
+  "quarterly_revenue": {
+    "note": "Asana fiscal year runs Feb-Jan, so 'Q1 FY2027' is roughly calendar Q1 2026. Only 3 quarters pulled in this pass (Q3 FY26, Q4 FY26, Q1 FY27) — same trailing-window gap as the MNDY case.",
+    "Q1_2027": {"revenue_musd": 205.1, "yoy_growth": 0.095},
+    "Q4_2026": {"revenue_musd": 205.6, "yoy_growth": 0.09},
+    "Q3_2026": {"revenue_musd": 201.0, "yoy_growth": 0.09}
+  },
+  "drivers": {
+    "revenue_growth_rate": {
+      "trailing_values": [0.095, 0.09],
+      "trailing_avg": 0.0925,
+      "guidance_range": [0.082, 0.092],
+      "citation": "Q1 FY2027 earnings release + FY2027 full-year guidance, Businesswire"
+    },
+    "ndr": {
+      "overall": 0.97,
+      "enterprise_50k_plus": 0.97,
+      "enterprise_100k_plus": 0.97,
+      "trend": "97% for 4 consecutive quarters — net retention below 100% (contracting), unlike MNDY's expansion. Enterprise-tier NDR not broken out publicly, so enterprise = overall here and the nudge is 0 by construction, not fabricated.",
+      "citation": "Q1 FY2027 earnings call, Motley Fool transcript"
+    },
+    "gross_margin": {
+      "value": 0.88,
+      "trend": "roughly flat, in line with MNDY's 89%",
+      "citation": "Q1 FY2027 earnings release"
+    },
+    "customer_counts": {
+      "over_100k_arr": {"value": 817, "yoy_growth": 0.12},
+      "over_500k_arr": {"value": null, "yoy_growth": null},
+      "citation": "Q1 FY2027 earnings release. $500K+ tier not disclosed by Asana — only $100K+ and 'Core' ($5K+, 26,103 customers, +7% YoY) tiers are public."
+    },
+    "rpo": {
+      "total_rpo_musd": 524.8,
+      "total_rpo_yoy_growth": 0.22,
+      "crpo_musd": null,
+      "crpo_yoy_growth": 0.17,
+      "citation": "Q4 FY2026 earnings release (most recent RPO breakout found). cRPO absolute dollar figure not located in this pass — only the 17% YoY growth rate was disclosed."
+    },
+    "deferred_revenue": {
+      "current_musd": 333.9,
+      "yoy_growth": 0.10,
+      "citation": "Q4 FY2026 earnings release — one quarter behind the Q1 FY2027 revenue base; no Q1 FY2027 figure located in this pass."
+    },
+    "non_gaap_operating_margin": {
+      "prior_fy_actual": 0.09,
+      "guidance_range": [0.0975, 0.0975],
+      "citation": "prior_fy_actual uses Q4 FY2026 quarterly non-GAAP op margin (9%) as a proxy — a clean full FY2026 actual wasn't confirmed in this pass. Guidance is FY2027 'at least 9.75%' (single figure, not a range, per Q1 FY2027 release)."
+    }
+  },
+  "known_gaps": [
+    "Enterprise-tier NDR not broken out publicly by Asana — used overall NDR (97%) for both fields, so the model's NDR-spread nudge is 0 by construction, not fabricated.",
+    "$500K+ ARR customer tier not disclosed — only $100K+ (817 customers) and Core $5K+ (26,103 customers) tiers are public.",
+    "cRPO absolute dollar figure not located in this data pull — only the 17% YoY growth rate is known; the dollar figure is null.",
+    "Deferred revenue figure is from Q4 FY2026, one quarter behind the Q1 FY2027 revenue base used elsewhere in this file.",
+    "prior_fy_actual non-GAAP operating margin uses a single quarter (Q4 FY2026, 9%) as a stand-in for a full-year actual — flagged as an approximation, not a confirmed FY figure.",
+    "Trailing revenue growth window is 2 quarters, not 4 — same structural gap as the MNDY case (SEC EDGAR blocked; press-release sourcing only covers what each release reports)."
+  ]
+}

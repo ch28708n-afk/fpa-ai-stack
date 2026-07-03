@@ -1,0 +1,65 @@
+{
+  "forecast": {
+    "base_revenue_musd": 205.1,
+    "growth_rate_applied": 0.0903,
+    "quarterly_rate_applied": 0.0218,
+    "growth_detail": {
+      "trailing_avg": 0.0925,
+      "guidance_mid": 0.087,
+      "ndr_spread": 0.0,
+      "nudge_applied": 0.0
+    },
+    "confidence_band_pp": 2.0,
+    "quarters": [
+      {
+        "quarter": "Q2 2027",
+        "base_case_musd": 209.6,
+        "low_musd": 208.6,
+        "high_musd": 210.5
+      },
+      {
+        "quarter": "Q3 2027",
+        "base_case_musd": 214.2,
+        "low_musd": 212.2,
+        "high_musd": 216.1
+      },
+      {
+        "quarter": "Q4 2027",
+        "base_case_musd": 218.8,
+        "low_musd": 215.8,
+        "high_musd": 221.8
+      },
+      {
+        "quarter": "Q1 2028",
+        "base_case_musd": 223.6,
+        "low_musd": 219.5,
+        "high_musd": 227.7
+      },
+      {
+        "quarter": "Q2 2028",
+        "base_case_musd": 228.5,
+        "low_musd": 223.3,
+        "high_musd": 233.8
+      },
+      {
+        "quarter": "Q3 2028",
+        "base_case_musd": 233.5,
+        "low_musd": 227.1,
+        "high_musd": 240.0
+      },
+      {
+        "quarter": "Q4 2028",
+        "base_case_musd": 238.6,
+        "low_musd": 231.0,
+        "high_musd": 246.3
+      },
+      {
+        "quarter": "Q1 2029",
+        "base_case_musd": 243.8,
+        "low_musd": 235.0,
+        "high_musd": 252.8
+      }
+    ]
+  },
+  "sample_commentary": "FORECAST \u2014 Q2 2027 Revenue: $208.6M \u2013 $210.5M (base case $209.6M)\n\nDrivers:\n- Trailing growth trend: 9.2% YoY -> CONFIRMED (filed, Q1 FY2027 earnings release + FY2027 full-year guidance, Businesswire)\n- Guidance midpoint: 8.7% YoY -> CONFIRMED (company guidance)\n- NDR spread (enterprise 97% vs overall 97%) nudges growth up 0.00pp -> HYPOTHESIS (assumes enterprise mix-shift continues; no quarter-specific guidance on this)\n\nOPEN ITEMS:\n- Enterprise-tier NDR not broken out publicly by Asana \u2014 used overall NDR (97%) for both fields, so the model's NDR-spread nudge is 0 by construction, not fabricated.\n- $500K+ ARR customer tier not disclosed \u2014 only $100K+ (817 customers) and Core $5K+ (26,103 customers) tiers are public.\n- cRPO absolute dollar figure not located in this data pull \u2014 only the 17% YoY growth rate is known; the dollar figure is null.\n- Deferred revenue figure is from Q4 FY2026, one quarter behind the Q1 FY2027 revenue base used elsewhere in this file.\n- prior_fy_actual non-GAAP operating margin uses a single quarter (Q4 FY2026, 9%) as a stand-in for a full-year actual \u2014 flagged as an approximation, not a confirmed FY figure.\n- Trailing revenue growth window is 2 quarters, not 4 \u2014 same structural gap as the MNDY case (SEC EDGAR blocked; press-release sourcing only covers what each release reports)."
+}

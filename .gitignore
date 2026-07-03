@@ -1,0 +1,15 @@
+# Generated artifacts — regenerate via load_raw.py + dbt build
+*.duckdb
+fpa_data_layer/target/
+fpa_data_layer/logs/
+fpa_data_layer/dbt_packages/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+dbt_venv/
+
+# OS
+.DS_Store
+Thumbs.db
