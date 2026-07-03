@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FP&A AI Stack — Charles Hassan</title>
+<meta name="description" content="A driver-based forecasting agent, a dbt/DuckDB data layer, and an LLM orchestrator built for explainable, auditable FP&A automation.">
+<style>
+  :root {
+    --navy: #1F3A5F;
+    --ink: #1F2933;
+    --muted: #5F6B7A;
+    --body: #374151;
+    --tint: #EEF2F7;
+    --rule: #C9D2DD;
+    --coral: #D85A30;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Calibri, Arial, sans-serif;
+    color: var(--body);
+    line-height: 1.6;
+    margin: 0;
+    background: #fff;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+  header.hero {
+    background: var(--navy);
+    color: white;
+    padding: 64px 0 48px;
+  }
+  header.hero h1 { font-size: 2rem; margin: 0 0 8px; }
+  header.hero p.tagline { font-size: 1.1rem; opacity: 0.9; margin: 0 0 20px; }
+  header.hero .links a {
+    color: white;
+    text-decoration: none;
+    border: 1px solid rgba(255,255,255,0.4);
+    padding: 6px 14px;
+    border-radius: 4px;
+    margin-right: 10px;
+    font-size: 0.9rem;
+    display: inline-block;
+    margin-bottom: 8px;
+  }
+  header.hero .links a:hover { background: rgba(255,255,255,0.1); }
+
+  section { padding: 40px 0; border-bottom: 1px solid var(--rule); }
+  section:last-child { border-bottom: none; }
+  h2 {
+    color: var(--navy);
+    font-size: 1.3rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    border-bottom: 2px solid var(--navy);
+    padding-bottom: 8px;
+    margin: 0 0 20px;
+  }
+
+  .stack-diagram {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin: 24px 0;
+  }
+  .stack-step {
+    background: var(--tint);
+    border-left: 4px solid var(--navy);
+    padding: 14px 18px;
+    border-radius: 0 4px 4px 0;
+  }
+  .stack-step .label { font-weight: 600; color: var(--navy); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.02em; }
+  .stack-step p { margin: 4px 0 0; font-size: 0.95rem; }
+  .arrow { text-align: center; color: var(--muted); font-size: 1.1rem; }
+
+  .callout {
+    background: #FAECE7;
+    border-left: 4px solid var(--coral);
+    padding: 16px 20px;
+    border-radius: 0 4px 4px 0;
+    margin: 20px 0;
+  }
+  .callout .label { font-weight: 600; color: #A32D2D; font-size: 0.85rem; text-transform: uppercase; }
+
+  .metrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+    margin: 20px 0;
+  }
+  .metric {
+    background: var(--tint);
+    border-radius: 4px;
+    padding: 16px;
+    text-align: center;
+  }
+  .metric .num { font-size: 1.4rem; font-weight: 700; color: var(--navy); }
+  .metric .label { font-size: 0.8rem; color: var(--muted); margin-top: 4px; }
+
+  .project-links a {
+    display: block;
+    padding: 10px 0;
+    color: var(--navy);
+    text-decoration: none;
+    border-bottom: 1px solid var(--rule);
+    font-weight: 600;
+  }
+  .project-links a:hover { color: var(--coral); }
+  .project-links span { display: block; font-weight: 400; color: var(--muted); font-size: 0.9rem; margin-top: 2px; }
+
+  footer { padding: 32px 0; text-align: center; color: var(--muted); font-size: 0.9rem; }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <h1>FP&amp;A AI Stack</h1>
+    <p class="tagline">A driver-based forecasting agent, a dbt + DuckDB data layer, and an LLM orchestrator — built for explainable, auditable FP&amp;A automation.</p>
+    <div class="links">
+      <a href="https://github.com/ch28708n-afk/fpa-ai-stack">GitHub Repo</a>
+      <a href="https://linkedin.com/in/charleshassan">LinkedIn</a>
+      <a href="https://thevariance.gumroad.com">The Variance (Gumroad)</a>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <section>
+    <h2>The Stack</h2>
+    <div class="stack-diagram">
+      <div class="stack-step">
+        <div class="label">1. Forecasting Agent</div>
+        <p>Converts SEC filing data into an 8-quarter, driver-based revenue forecast with Confirmed-vs-Hypothesis commentary. Non-ML, fully explainable — every number traces to a named driver and a citation.</p>
+      </div>
+      <div class="arrow">↓</div>
+      <div class="stack-step">
+        <div class="label">2. Data Layer</div>
+        <p>dbt + DuckDB turn the agent's output into a refreshable, tested (15 automated tests), dashboarded pipeline (Streamlit).</p>
+      </div>
+      <div class="arrow">↓</div>
+      <div class="stack-step">
+        <div class="label">3. FPA Copilot</div>
+        <p>An LLM (via OpenRouter) routes plain-English requests to deterministic Python tools — the forecast above, plus variance commentary and reconciliation review. The LLM only routes and summarizes; it never does the financial judgment itself.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>A Bug, Caught</h2>
+    <p>Mid-build, the forecast engine was compounding a YoY growth rate as if it were a quarterly rate — a unit confusion that would have projected a company's revenue to grow <strong>5.3x in two years</strong> instead of the guided ~20%.</p>
+    <div class="callout">
+      <div class="label">Before fix</div>
+      <p style="margin:4px 0 0">Q1 2028 forecast: <strong>$1,870.6M</strong> (a 5.3x jump from the $351.3M base)</p>
+      <div class="label" style="margin-top:12px">After fix</div>
+      <p style="margin:4px 0 0">Q1 2028 forecast: <strong>$533.6M</strong> (a 52% cumulative gain — ~23%/yr, matching guidance)</p>
+    </div>
+    <p>The fix: convert the annual rate to its equivalent quarterly compounding rate before applying it — <code>(1 + annual_rate)^0.25 - 1</code> — so 4 quarters of compounding equal the intended 1-year growth, not a 4x'd one. A regression test now guards specifically against this bug recurring.</p>
+  </section>
+
+  <section>
+    <h2>Proof It Generalizes</h2>
+    <p>The same forecasting code ran — unmodified — against a second company with a materially different profile:</p>
+    <div class="metrics">
+      <div class="metric"><div class="num">110%</div><div class="label">MNDY NDR (expanding)</div></div>
+      <div class="metric"><div class="num">97%</div><div class="label">Asana NDR (contracting)</div></div>
+      <div class="metric"><div class="num">0</div><div class="label">Code changes needed</div></div>
+      <div class="metric"><div class="num">6</div><div class="label">Data gaps flagged, not guessed</div></div>
+    </div>
+    <p>A missing data point becomes a flagged gap in the output, not a silent assumption — the same discipline carried from the forecasting agent through to the copilot's variance and reconciliation tools.</p>
+  </section>
+
+  <section>
+    <h2>Verified, Not Just Demoed</h2>
+    <div class="metrics">
+      <div class="metric"><div class="num">12</div><div class="label">Regression test assertions</div></div>
+      <div class="metric"><div class="num">15</div><div class="label">dbt data tests</div></div>
+      <div class="metric"><div class="num">3</div><div class="label">Copilot scenarios verified</div></div>
+      <div class="metric"><div class="num">2</div><div class="label">Companies proven</div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Read More</h2>
+    <div class="project-links">
+      <a href="https://github.com/ch28708n-afk/fpa-ai-stack/blob/master/Forecasting_Agent_CaseStudy.md">
+        Full Case Study
+        <span>The bug-catch story, the generalization proof, and what it demonstrates</span>
+      </a>
+      <a href="https://github.com/ch28708n-afk/fpa-ai-stack/blob/master/Forecasting_Agent_Spec.md">
+        Architecture Spec
+        <span>The 4-stage design, 7 named drivers, and the explainable forecast method</span>
+      </a>
+      <a href="https://github.com/ch28708n-afk/fpa-ai-stack">
+        Full Source Code
+        <span>All three phases — Forecasting Agent, Data Layer, FPA Copilot</span>
+      </a>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  Built by Charles Hassan — Finance &amp; Systems Transformation · FP&amp;A · Finance–IT Integration
+</footer>
+
+</body>
+</html>
