@@ -171,7 +171,10 @@ TOOL_SCHEMAS = [
                                 "name": {"type": "string"},
                                 "actual": {"type": "number"},
                                 "budget": {"type": "number"},
-                                "known_reason": {"type": "string", "description": "Optional. If provided, variance is marked CONFIRMED."},
+                                "known_reason": {
+                                    "type": "string",
+                                    "description": "Optional. If provided, variance is marked CONFIRMED.",
+                                },
                             },
                             "required": ["name", "actual", "budget"],
                         },
@@ -202,7 +205,10 @@ TOOL_SCHEMAS = [
                             "properties": {
                                 "description": {"type": "string"},
                                 "amount": {"type": "number"},
-                                "category": {"type": "string", "description": "e.g. 'duplicate', 'timing', 'unclassified'"},
+                                "category": {
+                                    "type": "string",
+                                    "description": "e.g. 'duplicate', 'timing', 'unclassified'",
+                                },
                             },
                             "required": ["description", "amount", "category"],
                         },

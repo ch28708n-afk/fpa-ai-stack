@@ -3,6 +3,7 @@
 fpa_data_layer/target/
 fpa_data_layer/logs/
 fpa_data_layer/dbt_packages/
+fpa_data_layer/.user.yml
 
 # Python
 __pycache__/

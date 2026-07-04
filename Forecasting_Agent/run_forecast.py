@@ -6,8 +6,9 @@ shape works — no code changes needed for a new company.
 """
 import json
 import sys
-from forecast_engine import load_drivers, forecast_quarters
+
 from commentary_generator import generate_commentary
+from forecast_engine import forecast_quarters, load_drivers
 
 
 def main():

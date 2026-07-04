@@ -10,7 +10,8 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from tools import get_forecast, get_variance_commentary, get_reconciliation_check
+from tools import get_forecast, get_reconciliation_check, get_variance_commentary
+
 from test_runner import run_tests
 
 

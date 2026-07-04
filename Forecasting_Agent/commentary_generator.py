@@ -45,7 +45,7 @@ def generate_commentary(drivers, forecast_result, quarter_index=0):
 
 
 if __name__ == "__main__":
-    from forecast_engine import load_drivers, forecast_quarters
+    from forecast_engine import forecast_quarters, load_drivers
 
     drivers = load_drivers("mndy_drivers.json")
     result = forecast_quarters(drivers, n_quarters=8)

@@ -1,0 +1,21 @@
+[tool.skylos.gate]
+# Fintech-adjacent portfolio repo — strict on security, lenient on quality
+# style findings (this repo intentionally keeps print() output in its
+# __main__ blocks and test runners; skylos flags those as "debug leftovers"
+# but they're the designed CLI behavior, not accidental).
+fail_on_critical = true
+max_critical = 0
+max_security = 0
+max_high = 5
+# 29 reviewed-and-accepted findings as of 2026-07-04 (mostly print() in __main__
+# blocks and the test runners' PASS/FAIL output -- the designed CLI behavior of
+# these portfolio scripts, not debug leftovers). Small headroom above that, not
+# unlimited -- a big jump here should still get a second look.
+max_quality = 32
+
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]

@@ -8,9 +8,13 @@ see MNDY_Financial_Extract.md and the Forecasting_Agent/*_drivers.json files
 for provenance. This script does not call any live API; it's the boundary
 between "manually-sourced filing data" and "the warehouse."
 """
-import json
-import duckdb
+import sys
 from pathlib import Path
+
+import duckdb
+
+sys.path.insert(0, str(Path(__file__).parent.parent))
+from safe_io import read_json_file  # noqa: E402 — needs sys.path set up first
 
 FORECASTING_AGENT_DIR = Path(__file__).parent.parent / "Forecasting_Agent"
 DB_PATH = Path(__file__).parent / "warehouse.duckdb"
@@ -19,8 +23,10 @@ DRIVER_FILES = ["mndy_drivers.json", "asana_drivers.json"]
 
 
 def load_driver_file(path):
-    with open(path, "r") as f:
-        return json.load(f)
+    # base_dir=FORECASTING_AGENT_DIR: these filenames come from the hardcoded
+    # DRIVER_FILES list, not external input, but the path is still built by
+    # concatenation — enforce it can't resolve outside that directory.
+    return read_json_file(path, base_dir=FORECASTING_AGENT_DIR)
 
 
 def flatten_drivers_row(data):
@@ -46,8 +52,7 @@ def flatten_drivers_row(data):
 
 
 def flatten_forecast_rows(company, forecast_output_path):
-    with open(forecast_output_path, "r") as f:
-        output = json.load(f)
+    output = read_json_file(forecast_output_path, base_dir=FORECASTING_AGENT_DIR)
     rows = []
     for q in output["forecast"]["quarters"]:
         rows.append({

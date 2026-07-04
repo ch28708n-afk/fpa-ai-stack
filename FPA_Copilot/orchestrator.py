@@ -9,17 +9,19 @@ inspectable and testable independent of the LLM.
 
 Usage:
     python orchestrator.py "What's the forecast for MNDY?"
-    python orchestrator.py "Check this rec: net diff 11800, explained 11800, one item: vendor invoice posted twice for 11500, category duplicate"
+    python orchestrator.py "Check this rec: net diff 11800, explained 11800, \
+one item: vendor invoice posted twice for 11500, category duplicate"
 """
 import json
 import os
 import sys
 
 from openai import OpenAI
-
-from tools import TOOL_SCHEMAS, TOOL_FUNCTIONS
+from tools import TOOL_FUNCTIONS, TOOL_SCHEMAS
 
 MODEL = "openai/gpt-4o-mini"  # cheap, reliable tool-calling. Swap here to change cost/quality tradeoff.
+MAX_TOKENS = 1000  # tool-routing + summarization responses are short; caps runaway cost
+REQUEST_TIMEOUT_S = 30
 
 SYSTEM_PROMPT = """You are an FP&A copilot orchestrator. You have three tools:
 get_forecast, get_variance_commentary, and get_reconciliation_check. Each tool
@@ -50,6 +52,8 @@ def run_copilot(user_request: str) -> str:
         messages=messages,
         tools=TOOL_SCHEMAS,
         tool_choice="auto",
+        max_tokens=MAX_TOKENS,
+        timeout=REQUEST_TIMEOUT_S,
     )
 
     message = response.choices[0].message
@@ -64,6 +68,8 @@ def run_copilot(user_request: str) -> str:
     final_response = client.chat.completions.create(
         model=MODEL,
         messages=messages,
+        max_tokens=MAX_TOKENS,
+        timeout=REQUEST_TIMEOUT_S,
     )
 
     return final_response.choices[0].message.content

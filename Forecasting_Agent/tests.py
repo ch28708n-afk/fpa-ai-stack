@@ -15,7 +15,13 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from forecast_engine import load_drivers, forecast_quarters, blended_growth_rate, _future_quarter_labels
+from forecast_engine import (
+    _future_quarter_labels,
+    blended_growth_rate,
+    forecast_quarters,
+    load_drivers,
+)
+
 from test_runner import run_tests
 
 MNDY_DRIVERS_FILE = "mndy_drivers.json"

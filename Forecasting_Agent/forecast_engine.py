@@ -5,11 +5,18 @@ Deliberately non-ML: every number traces back to an explainable rule (see
 Forecasting_Agent_Spec.md, Section 4).
 """
 import json
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).parent.parent))
+from safe_io import read_json_file  # noqa: E402 — needs sys.path set up first
 
 
 def load_drivers(path):
-    with open(path, "r") as f:
-        return json.load(f)
+    # base_dir=cwd: this is the CLI-args entry point (run_forecast.py accepts a
+    # user-supplied filename), so the enforced root is wherever the tool was invoked
+    # from — matches the documented usage (run with a bare filename from that directory).
+    return read_json_file(path, base_dir=Path.cwd())
 
 
 def blended_growth_rate(drivers, trailing_weight=0.6, guidance_weight=0.4):
