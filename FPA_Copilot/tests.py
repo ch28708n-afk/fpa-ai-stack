@@ -5,7 +5,13 @@ where all the actual financial judgment lives.
 
 Run: python tests.py
 """
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
 from tools import get_forecast, get_variance_commentary, get_reconciliation_check
+from test_runner import run_tests
 
 
 def test_ambiguous_company_match_errors_instead_of_blending():
@@ -74,20 +80,5 @@ TESTS = [
 ]
 
 
-def main():
-    passed, failed = 0, 0
-    for test in TESTS:
-        try:
-            test()
-            print(f"PASS  {test.__name__}")
-            passed += 1
-        except AssertionError as e:
-            print(f"FAIL  {test.__name__}: {e}")
-            failed += 1
-    print(f"\n{passed} passed, {failed} failed")
-    if failed:
-        raise SystemExit(1)
-
-
 if __name__ == "__main__":
-    main()
+    run_tests(TESTS)

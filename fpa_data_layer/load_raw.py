@@ -24,23 +24,23 @@ def load_driver_file(path):
 
 
 def flatten_drivers_row(data):
-    d = data["drivers"]
+    drivers = data["drivers"]
     return {
         "company": data["company"],
         "as_of_quarter": data["as_of_quarter"],
-        "revenue_growth_trailing_avg": d["revenue_growth_rate"]["trailing_avg"],
-        "revenue_growth_guidance_lo": d["revenue_growth_rate"]["guidance_range"][0],
-        "revenue_growth_guidance_hi": d["revenue_growth_rate"]["guidance_range"][1],
-        "ndr_overall": d["ndr"]["overall"],
-        "ndr_enterprise_100k_plus": d["ndr"]["enterprise_100k_plus"],
-        "gross_margin": d["gross_margin"]["value"],
-        "customers_100k_plus": d["customer_counts"]["over_100k_arr"]["value"],
-        "customers_100k_plus_yoy_growth": d["customer_counts"]["over_100k_arr"]["yoy_growth"],
-        "total_rpo_musd": d["rpo"]["total_rpo_musd"],
-        "total_rpo_yoy_growth": d["rpo"]["total_rpo_yoy_growth"],
-        "deferred_revenue_musd": d["deferred_revenue"]["current_musd"],
-        "deferred_revenue_yoy_growth": d["deferred_revenue"]["yoy_growth"],
-        "non_gaap_op_margin_prior_fy": d["non_gaap_operating_margin"]["prior_fy_actual"],
+        "revenue_growth_trailing_avg": drivers["revenue_growth_rate"]["trailing_avg"],
+        "revenue_growth_guidance_lo": drivers["revenue_growth_rate"]["guidance_range"][0],
+        "revenue_growth_guidance_hi": drivers["revenue_growth_rate"]["guidance_range"][1],
+        "ndr_overall": drivers["ndr"]["overall"],
+        "ndr_enterprise_100k_plus": drivers["ndr"]["enterprise_100k_plus"],
+        "gross_margin": drivers["gross_margin"]["value"],
+        "customers_100k_plus": drivers["customer_counts"]["over_100k_arr"]["value"],
+        "customers_100k_plus_yoy_growth": drivers["customer_counts"]["over_100k_arr"]["yoy_growth"],
+        "total_rpo_musd": drivers["rpo"]["total_rpo_musd"],
+        "total_rpo_yoy_growth": drivers["rpo"]["total_rpo_yoy_growth"],
+        "deferred_revenue_musd": drivers["deferred_revenue"]["current_musd"],
+        "deferred_revenue_yoy_growth": drivers["deferred_revenue"]["yoy_growth"],
+        "non_gaap_op_margin_prior_fy": drivers["non_gaap_operating_margin"]["prior_fy_actual"],
         "known_gaps_count": len(data.get("known_gaps", [])),
     }
 
@@ -60,14 +60,12 @@ def flatten_forecast_rows(company, forecast_output_path):
     return rows
 
 
-def main():
-    con = duckdb.connect(str(DB_PATH))
-    con.execute("CREATE SCHEMA IF NOT EXISTS raw")
-
+def _load_all_rows(driver_files):
+    """Read each driver file + its matching forecast output, flattened for insert."""
     driver_rows = []
     forecast_rows = []
 
-    for filename in DRIVER_FILES:
+    for filename in driver_files:
         path = FORECASTING_AGENT_DIR / filename
         data = load_driver_file(path)
         driver_rows.append(flatten_drivers_row(data))
@@ -79,6 +77,15 @@ def main():
         else:
             print(f"WARNING: no forecast output found for {data['company']} at {forecast_path} "
                   f"— run Forecasting_Agent/run_forecast.py first.")
+
+    return driver_rows, forecast_rows
+
+
+def main():
+    con = duckdb.connect(str(DB_PATH))
+    con.execute("CREATE SCHEMA IF NOT EXISTS raw")
+
+    driver_rows, forecast_rows = _load_all_rows(DRIVER_FILES)
 
     con.execute("DROP TABLE IF EXISTS raw.drivers")
     con.execute("""

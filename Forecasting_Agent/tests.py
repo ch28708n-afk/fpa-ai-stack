@@ -10,9 +10,16 @@ class of bug (unit/rate confusion) — can't silently come back.
 
 Run: python tests.py
 """
-import math
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from forecast_engine import load_drivers, forecast_quarters, blended_growth_rate, _future_quarter_labels
+from test_runner import run_tests
+
+MNDY_DRIVERS_FILE = "mndy_drivers.json"
+ASANA_DRIVERS_FILE = "asana_drivers.json"
 
 
 def test_yoy_to_quarterly_conversion_is_not_identity():
@@ -38,7 +45,7 @@ def test_mndy_8q_forecast_does_not_blow_up():
     """Sanity ceiling: 8 quarters (2 years) of MNDY's own guided ~20% growth
     should land revenue well under 2x the base, not 5x+ like the pre-fix bug
     produced ($351M -> $1.87B, a 5.3x)."""
-    drivers = load_drivers("mndy_drivers.json")
+    drivers = load_drivers(MNDY_DRIVERS_FILE)
     result = forecast_quarters(drivers, n_quarters=8)
     base = result["base_revenue_musd"]
     final_base_case = result["quarters"][-1]["base_case_musd"]
@@ -56,7 +63,7 @@ def test_mndy_8q_forecast_does_not_blow_up():
 
 def test_confidence_band_produces_low_lt_base_lt_high():
     """Every forecasted quarter's low/base/high must be correctly ordered."""
-    drivers = load_drivers("mndy_drivers.json")
+    drivers = load_drivers(MNDY_DRIVERS_FILE)
     result = forecast_quarters(drivers, n_quarters=8)
     for q in result["quarters"]:
         assert q["low_musd"] <= q["base_case_musd"] <= q["high_musd"], (
@@ -76,7 +83,7 @@ def test_asana_generalization_still_works():
     Must not error, and must produce a growth rate close to Asana's own
     guidance (~8-9%), not something wildly off due to hardcoded MNDY logic
     creeping back in."""
-    drivers = load_drivers("asana_drivers.json")
+    drivers = load_drivers(ASANA_DRIVERS_FILE)
     result = forecast_quarters(drivers, n_quarters=8)
     annual_rate = result["growth_rate_applied"]
     assert 0.05 < annual_rate < 0.15, (
@@ -89,11 +96,11 @@ def test_asana_generalization_still_works():
 def test_ndr_nudge_direction():
     """MNDY has enterprise NDR > overall NDR, so the nudge should be positive.
     Asana has them equal (undisclosed enterprise tier), so nudge should be ~0."""
-    mndy = load_drivers("mndy_drivers.json")
+    mndy = load_drivers(MNDY_DRIVERS_FILE)
     _, mndy_detail = blended_growth_rate(mndy)
     assert mndy_detail["nudge_applied"] > 0, "MNDY's NDR spread should produce a positive nudge"
 
-    asana = load_drivers("asana_drivers.json")
+    asana = load_drivers(ASANA_DRIVERS_FILE)
     _, asana_detail = blended_growth_rate(asana)
     assert abs(asana_detail["nudge_applied"]) < 1e-9, (
         "Asana's enterprise/overall NDR are equal by construction (undisclosed tier) "
@@ -111,20 +118,5 @@ TESTS = [
 ]
 
 
-def main():
-    passed, failed = 0, 0
-    for test in TESTS:
-        try:
-            test()
-            print(f"PASS  {test.__name__}")
-            passed += 1
-        except AssertionError as e:
-            print(f"FAIL  {test.__name__}: {e}")
-            failed += 1
-    print(f"\n{passed} passed, {failed} failed")
-    if failed:
-        raise SystemExit(1)
-
-
 if __name__ == "__main__":
-    main()
+    run_tests(TESTS)

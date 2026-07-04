@@ -7,7 +7,7 @@ raises a hard OPEN flag for anything not yet decomposed.
 
 
 def generate_commentary(drivers, forecast_result, quarter_index=0):
-    d = drivers["drivers"]
+    driver_data = drivers["drivers"]
     q = forecast_result["quarters"][quarter_index]
     detail = forecast_result["growth_detail"]
 
@@ -19,13 +19,13 @@ def generate_commentary(drivers, forecast_result, quarter_index=0):
     lines.append("Drivers:")
     lines.append(
         f"- Trailing growth trend: {detail['trailing_avg']*100:.1f}% YoY "
-        f"-> CONFIRMED (filed, {d['revenue_growth_rate']['citation']})"
+        f"-> CONFIRMED (filed, {driver_data['revenue_growth_rate']['citation']})"
     )
     lines.append(
         f"- Guidance midpoint: {detail['guidance_mid']*100:.1f}% YoY "
         f"-> CONFIRMED (company guidance)"
     )
-    ndr = d["ndr"]
+    ndr = driver_data["ndr"]
     lines.append(
         f"- NDR spread (enterprise {ndr['enterprise_100k_plus']*100:.0f}% vs overall "
         f"{ndr['overall']*100:.0f}%) nudges growth "
@@ -45,7 +45,6 @@ def generate_commentary(drivers, forecast_result, quarter_index=0):
 
 
 if __name__ == "__main__":
-    import json
     from forecast_engine import load_drivers, forecast_quarters
 
     drivers = load_drivers("mndy_drivers.json")

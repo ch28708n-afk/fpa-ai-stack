@@ -6,7 +6,6 @@ arguments to pass; the actual judgment (materiality gates, Confirmed-vs-
 Hypothesis, duplicate detection) is deterministic and auditable, same
 discipline as the Month-End Close Toolkit and the Forecasting Agent.
 """
-import sys
 from pathlib import Path
 
 import duckdb

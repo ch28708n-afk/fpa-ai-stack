@@ -9,7 +9,6 @@ Run: streamlit run dashboard.py
 from pathlib import Path
 
 import duckdb
-import pandas as pd
 import streamlit as st
 
 DB_PATH = str(Path(__file__).parent / "warehouse.duckdb")

@@ -13,17 +13,17 @@ def load_drivers(path):
 
 
 def blended_growth_rate(drivers, trailing_weight=0.6, guidance_weight=0.4):
-    d = drivers["drivers"]
-    trailing_avg = d["revenue_growth_rate"]["trailing_avg"]
-    guidance_lo, guidance_hi = d["revenue_growth_rate"]["guidance_range"]
+    driver_data = drivers["drivers"]
+    trailing_avg = driver_data["revenue_growth_rate"]["trailing_avg"]
+    guidance_lo, guidance_hi = driver_data["revenue_growth_rate"]["guidance_range"]
     guidance_mid = (guidance_lo + guidance_hi) / 2
 
     base_rate = trailing_weight * trailing_avg + guidance_weight * guidance_mid
 
     # NDR nudge: if enterprise NDR (115-116%) is meaningfully above overall NDR (110%),
     # nudge growth up slightly — enterprise mix-shift is a forward-looking tailwind.
-    ndr_overall = d["ndr"]["overall"]
-    ndr_enterprise = d["ndr"]["enterprise_100k_plus"]
+    ndr_overall = driver_data["ndr"]["overall"]
+    ndr_enterprise = driver_data["ndr"]["enterprise_100k_plus"]
     ndr_spread = ndr_enterprise - ndr_overall
     nudge = ndr_spread * 0.15  # damped — NDR spread is a signal, not a direct driver
 
@@ -38,9 +38,9 @@ def blended_growth_rate(drivers, trailing_weight=0.6, guidance_weight=0.4):
 def confidence_band(base_rate, drivers):
     # Band width derived from the spread between trailing actuals and guidance —
     # a proxy for how much the company's own guidance has moved vs. trend.
-    d = drivers["drivers"]
-    trailing_avg = d["revenue_growth_rate"]["trailing_avg"]
-    guidance_lo, guidance_hi = d["revenue_growth_rate"]["guidance_range"]
+    driver_data = drivers["drivers"]
+    trailing_avg = driver_data["revenue_growth_rate"]["trailing_avg"]
+    guidance_lo, guidance_hi = driver_data["revenue_growth_rate"]["guidance_range"]
     spread = abs(trailing_avg - guidance_hi)
     return max(spread, 0.02)  # floor at +/-2pp so the band is never zero
 

@@ -10,6 +10,9 @@ __pycache__/
 .venv/
 dbt_venv/
 
+# Tooling caches
+.skylos/
+
 # OS
 .DS_Store
 Thumbs.db

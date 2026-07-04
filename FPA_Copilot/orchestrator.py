@@ -59,7 +59,19 @@ def run_copilot(user_request: str) -> str:
         return message.content
 
     messages.append(message)
+    _execute_tool_calls(message, messages)
 
+    final_response = client.chat.completions.create(
+        model=MODEL,
+        messages=messages,
+    )
+
+    return final_response.choices[0].message.content
+
+
+def _execute_tool_calls(message, messages):
+    """Run each tool the LLM requested and append its result as a tool message.
+    Mutates `messages` in place (matches OpenAI's tool-call message-thread shape)."""
     for tool_call in message.tool_calls:
         fn_name = tool_call.function.name
         fn_args = json.loads(tool_call.function.arguments)
@@ -77,13 +89,6 @@ def run_copilot(user_request: str) -> str:
             "tool_call_id": tool_call.id,
             "content": json.dumps(result),
         })
-
-    final_response = client.chat.completions.create(
-        model=MODEL,
-        messages=messages,
-    )
-
-    return final_response.choices[0].message.content
 
 
 if __name__ == "__main__":
