@@ -50,12 +50,26 @@ for a real bug caught mid-build (a YoY-vs-quarterly compounding error that
 would have 5x'd a forecast) and the regression test written afterward so it
 can't recur.
 
+## Bonus: Live Artifacts Demo
+
+A 4th, standalone piece — [Live_Artifacts_Demo/](Live_Artifacts_Demo/) —
+answering Claude Cowork's "Live Artifacts" feature (an auto-refreshing
+analyst environment wired directly to live data sources). Same idea, built
+with Python + Streamlit + OpenRouter instead of that specific product
+feature: a 3-layer connected analyst read (P&L pulse, variance bridge,
+plant-level operational signals) on a fictional auto manufacturer, with a
+data-source selector that actually demonstrates the refresh — switching
+periods flips which plant gets flagged, proving the logic reacts to real
+data changes rather than being hardcoded. 9 regression tests, including a
+threshold-boundary test that catches off-by-one comparison bugs.
+
 ## Running it
 
 Each subfolder has its own README with exact run instructions:
 - [Forecasting_Agent/](Forecasting_Agent/) — `python run_forecast.py <company>_drivers.json`, tests via `python tests.py`
 - [fpa_data_layer/](fpa_data_layer/) — see its README for the Python-version note (dbt needs 3.11, not the latest Python)
 - [FPA_Copilot/](FPA_Copilot/) — `python orchestrator.py "your question here"`, tests via `python tests.py`
+- [Live_Artifacts_Demo/](Live_Artifacts_Demo/) — `streamlit run dashboard.py`, tests via `python tests.py`
 
 ## Docs
 
@@ -64,7 +78,8 @@ Each subfolder has its own README with exact run instructions:
 
 ## Status
 
-All three phases are built, tested, and verified end-to-end — not just
-specced. 24 automated assertions across the two test suites, 15 dbt tests,
-and 3 manually-verified Copilot scenarios (single-tool routing, multi-tool
-routing, out-of-scope refusal).
+All three core phases are built, tested, and verified end-to-end — not just
+specced. 24 automated assertions across the two core test suites, 15 dbt
+tests, and 3 manually-verified Copilot scenarios (single-tool routing,
+multi-tool routing, out-of-scope refusal). The Live Artifacts Demo bonus
+piece adds 9 more regression tests on top of that.

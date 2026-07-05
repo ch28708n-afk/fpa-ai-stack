@@ -1,0 +1,31 @@
+{
+  "company": "Meridian Motors Corp",
+  "period": "Q2 2026",
+  "as_of": "2026-07-04T18:00:00Z",
+  "executive_pulse": {
+    "revenue_actual": 412500000,
+    "revenue_budget": 398000000,
+    "gross_margin_pct_actual": 22.4,
+    "gross_margin_pct_budget": 24.1,
+    "units_sold_actual": 61200,
+    "units_sold_budget": 58500
+  },
+  "variance_bridge": {
+    "revenue_budget": 398000000,
+    "price_variance": 6100000,
+    "volume_variance": 11700000,
+    "mix_variance": -3300000,
+    "revenue_actual": 412500000,
+    "cost_budget": 302280000,
+    "material_cost_variance": 14200000,
+    "labor_cost_variance": 3100000,
+    "freight_cost_variance": 5600000,
+    "cost_actual": 325180000
+  },
+  "manufacturing": {
+    "plants": [
+      {"name": "Riverbend Assembly", "units_produced": 34100, "defect_rate_pct": 1.8, "defect_rate_pct_prior": 1.2, "supplier_lead_time_days": 18, "supplier_lead_time_days_prior": 12},
+      {"name": "Coldwater Stamping", "units_produced": 27100, "defect_rate_pct": 0.9, "defect_rate_pct_prior": 1.0, "supplier_lead_time_days": 11, "supplier_lead_time_days_prior": 11}
+    ]
+  }
+}
