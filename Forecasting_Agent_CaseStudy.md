@@ -65,13 +65,14 @@ Full architecture + driver definitions: [Forecasting_Agent_Spec.md](Forecasting_
 
 ## Part of a Larger Stack
 
-The Forecasting Agent isn't standalone — it's the centerpiece of a 3-phase FP&A AI Stack:
+The Forecasting Agent isn't standalone — it's the centerpiece of a 4-piece FP&A AI Stack:
 
 1. **Forecasting Agent** (this case study) — driver-based forecast + commentary, generalized across 2 companies
 2. **Data Layer** (`fpa_data_layer/`) — DuckDB + dbt (15 tests) turn the agent's output into a refreshable, dashboarded pipeline (Streamlit)
 3. **FPA Copilot** (`FPA_Copilot/`) — an LLM orchestrator routes natural-language requests to this agent plus two Month-End Close Toolkit-derived tools (variance commentary, reconciliation review), all in one interface
+4. **Live Artifacts Demo** (`Live_Artifacts_Demo/`) — a continuously-connected, 3-layer analyst environment (P&L pulse, variance bridge, plant-level operational signals) whose refresh logic is proven by period-switching, with 9 regression tests
 
-Full code for all three: see the project README at the repo root.
+Full code for all four: see the project README at the repo root.
 
 ---
 

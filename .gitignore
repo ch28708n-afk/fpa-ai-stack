@@ -13,6 +13,10 @@ dbt_venv/
 
 # Tooling caches
 .skylos/
+.ruff_cache/
+
+# WIP redesigns — not ready for the public repo
+docs_staging/
 
 # OS
 .DS_Store
